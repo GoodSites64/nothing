@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Ahmad's Website</title>
+  <style>
+    /* 1. Cool Animated Background */
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      font-family: sans-serif;
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* 2. Typography */
+    #MW {
+      text-align: center;
+      color: white;
+      font-size: 80px;
+      font-weight: bold;
+      font-family: fantasy;
+      margin-bottom: 0;
+      text-shadow: 2px 4px 10px rgba(0,0,0,0.2);
+    }
+
+    #AAW {
+      text-align: center;
+      color: white;
+      font-size: 40px;
+      font-weight: bold;
+      font-family: fantasy;
+      margin-top: 10px;
+      text-shadow: 2px 4px 10px rgba(0,0,0,0.2);
+    }
+
+    /* 3. Glassmorphism Button */
+    #nothing {
+      display: block;
+      margin: 40px auto;
+      padding: 20px 45px;
+      font-size: 22px;
+      font-weight: bold;
+      color: #333;
+      cursor: pointer;
+
+      /* Glass effect */
+      background: rgba(255, 255, 255, 0.4);
+      border-radius: 50px;
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      box-shadow: 
+        0 12px 30px rgba(0, 0, 0, 0.15),
+        inset 0 4px 8px rgba(255, 255, 255, 0.8),
+        inset 0 -4px 8px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    #nothing:hover {
+      transform: scale(1.05);
+      box-shadow: 
+        0 18px 35px rgba(0, 0, 0, 0.2),
+        inset 0 6px 12px rgba(255, 255, 255, 1),
+        inset 0 -4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    #nothing:active {
+      transform: scale(0.95);
+    }
+
+    /* 4. Glass Stats Box */
+    #stats-container {
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      padding: 20px 40px;
+      border-radius: 20px;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      color: white;
+      font-size: 20px;
+      font-weight: bold;
+      text-align: center;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+      margin-top: 20px;
+    }
+
+    .stat-number {
+      font-size: 28px;
+      color: #fff;
+      text-shadow: 1px 2px 4px rgba(0,0,0,0.2);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HTML Elements go inside the body! -->
+  <h1 id="MW">My Website</h1>
+  <p id="AAW">Ahmad's Awsome Website!</p>
+  
+  <button id="nothing">Nothing Button</button>
+  
+  <!-- Counter Display -->
+  <div id="stats-container">
+    <p>Session Clicks: <span id="session-count" class="stat-number">0</span></p>
+    <p>All-Time Clicks: <span id="alltime-count" class="stat-number">0</span></p>
+  </div>
+
+  <!-- JavaScript to make the counters work -->
+  <script>
+    // Grab the button and the counter spans from the HTML
+    const button = document.getElementById('nothing');
+    const sessionDisplay = document.getElementById('session-count');
+    const allTimeDisplay = document.getElementById('alltime-count');
+
+    // Get existing data from the browser, or default to 0 if it doesn't exist
+    // sessionStorage resets when the tab closes. localStorage stays forever.
+    let sessionClicks = parseInt(sessionStorage.getItem('sessionClicks')) || 0;
+    let allTimeClicks = parseInt(localStorage.getItem('allTimeClicks')) || 0;
+
+    // Show initial values on the page load
+    sessionDisplay.textContent = sessionClicks;
+    allTimeDisplay.textContent = allTimeClicks;
+
+    // What happens when you click the button
+    button.addEventListener('click', () => {
+      // 1. Increase the numbers
+      sessionClicks++;
+      allTimeClicks++;
+
+      // 2. Save the new numbers to the browser's memory
+      sessionStorage.setItem('sessionClicks', sessionClicks);
+      localStorage.setItem('allTimeClicks', allTimeClicks);
+
+      // 3. Update the text on the screen
+      sessionDisplay.textContent = sessionClicks;
+      allTimeDisplay.textContent = allTimeClicks;
+    });
+  </script>
+</body>
+</html>
