@@ -94,6 +94,7 @@
       text-align: center;
       box-shadow: 0 8px 32px rgba(0,0,0,0.1);
       margin-top: 20px;
+      margin-bottom: 30px;
     }
 
     .stat-number {
@@ -101,51 +102,81 @@
       color: #fff;
       text-shadow: 1px 2px 4px rgba(0,0,0,0.2);
     }
+
+    /* 5. Big Red Reset Button */
+    #reset-btn {
+      display: block;
+      padding: 15px 35px;
+      font-size: 20px;
+      font-weight: bold;
+      color: white;
+      background-color: #ff3b30;
+      border: 3px solid #cc0000;
+      border-radius: 12px;
+      cursor: pointer;
+      box-shadow: 0 6px 15px rgba(255, 59, 48, 0.4);
+      transition: all 0.2s ease;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    #reset-btn:hover {
+      background-color: #d62820;
+      transform: scale(1.05);
+      box-shadow: 0 8px 20px rgba(255, 59, 48, 0.6);
+    }
+
+    #reset-btn:active {
+      transform: scale(0.95);
+    }
   </style>
 </head>
 <body>
 
-  <!-- HTML Elements go inside the body! -->
   <h1 id="MW">My Website</h1>
   <p id="AAW">Ahmad's Awsome Website!</p>
   
   <button id="nothing">Nothing Button</button>
   
-  <!-- Counter Display -->
   <div id="stats-container">
-    <p>Session Clicks: <span id="session-count" class="stat-number">0</span></p>
+    <p>Current Page Clicks: <span id="session-count" class="stat-number">0</span></p>
     <p>All-Time Clicks: <span id="alltime-count" class="stat-number">0</span></p>
   </div>
 
-  <!-- JavaScript to make the counters work -->
+  <button id="reset-btn">Reset All-Time</button>
+
   <script>
-    // Grab the button and the counter spans from the HTML
     const button = document.getElementById('nothing');
+    const resetBtn = document.getElementById('reset-btn');
     const sessionDisplay = document.getElementById('session-count');
     const allTimeDisplay = document.getElementById('alltime-count');
 
-    // Get existing data from the browser, or default to 0 if it doesn't exist
-    // sessionStorage resets when the tab closes. localStorage stays forever.
-    let sessionClicks = parseInt(sessionStorage.getItem('sessionClicks')) || 0;
+    let sessionClicks = 0; 
     let allTimeClicks = parseInt(localStorage.getItem('allTimeClicks')) || 0;
 
-    // Show initial values on the page load
     sessionDisplay.textContent = sessionClicks;
     allTimeDisplay.textContent = allTimeClicks;
 
-    // What happens when you click the button
+    // Handle the main button clicks
     button.addEventListener('click', () => {
-      // 1. Increase the numbers
       sessionClicks++;
       allTimeClicks++;
 
-      // 2. Save the new numbers to the browser's memory
-      sessionStorage.setItem('sessionClicks', sessionClicks);
       localStorage.setItem('allTimeClicks', allTimeClicks);
 
-      // 3. Update the text on the screen
       sessionDisplay.textContent = sessionClicks;
       allTimeDisplay.textContent = allTimeClicks;
+    });
+
+    // Handle the reset button click with confirmation
+    resetBtn.addEventListener('click', () => {
+      const confirmReset = confirm("Are you sure you want to delete your all-time clicks forever? This cannot be undone.");
+      
+      if (confirmReset) {
+        allTimeClicks = 0;
+        localStorage.setItem('allTimeClicks', 0);
+        allTimeDisplay.textContent = allTimeClicks;
+      }
     });
   </script>
 </body>
