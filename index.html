@@ -1,183 +1,131 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Ahmad's Website</title>
-  <style>
-    /* 1. Cool Animated Background */
-    body {
-      margin: 0;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-      background-size: 400% 400%;
-      animation: gradientBG 15s ease infinite;
-      font-family: sans-serif;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Useless Button</title>
 
-    @keyframes gradientBG {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-    /* 2. Typography */
-    #MW {
-      text-align: center;
-      color: white;
-      font-size: 80px;
-      font-weight: bold;
-      font-family: fantasy;
-      margin-bottom: 0;
-      text-shadow: 2px 4px 10px rgba(0,0,0,0.2);
-    }
+body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #101014;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+    color: white;
+}
 
-    #AAW {
-      text-align: center;
-      color: white;
-      font-size: 40px;
-      font-weight: bold;
-      font-family: fantasy;
-      margin-top: 10px;
-      text-shadow: 2px 4px 10px rgba(0,0,0,0.2);
-    }
+.container {
+    text-align: center;
+    animation: appear 1s ease;
+}
 
-    /* 3. Glassmorphism Button */
-    #nothing {
-      display: block;
-      margin: 40px auto;
-      padding: 20px 45px;
-      font-size: 22px;
-      font-weight: bold;
-      color: #333;
-      cursor: pointer;
+h1 {
+    font-size: clamp(28px, 5vw, 46px);
+    margin-bottom: 12px;
+    letter-spacing: -1px;
+}
 
-      /* Glass effect */
-      background: rgba(255, 255, 255, 0.4);
-      border-radius: 50px;
-      border: 1px solid rgba(255, 255, 255, 0.6);
-      box-shadow: 
-        0 12px 30px rgba(0, 0, 0, 0.15),
-        inset 0 4px 8px rgba(255, 255, 255, 0.8),
-        inset 0 -4px 8px rgba(0, 0, 0, 0.1);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
+p {
+    color: #85858f;
+    font-size: 15px;
+    margin-bottom: 55px;
+}
 
-    #nothing:hover {
-      transform: scale(1.05);
-      box-shadow: 
-        0 18px 35px rgba(0, 0, 0, 0.2),
-        inset 0 6px 12px rgba(255, 255, 255, 1),
-        inset 0 -4px 8px rgba(0, 0, 0, 0.1);
-    }
+button {
+    width: 260px;
+    height: 260px;
+    border: none;
+    border-radius: 50%;
+    background: linear-gradient(145deg, #ff3939, #c90000);
+    color: white;
+    font-size: 27px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    cursor: pointer;
+    box-shadow:
+        0 15px 35px rgba(255, 0, 0, 0.25),
+        inset 0 4px 8px rgba(255,255,255,0.2),
+        inset 0 -8px 12px rgba(0,0,0,0.2);
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.25s ease,
+        filter 0.25s ease;
+    -webkit-tap-highlight-color: transparent;
+}
 
-    #nothing:active {
-      transform: scale(0.95);
-    }
+button:hover {
+    transform: scale(1.07);
+    filter: brightness(1.12);
+    box-shadow:
+        0 20px 55px rgba(255, 0, 0, 0.4),
+        inset 0 4px 8px rgba(255,255,255,0.2);
+}
 
-    /* 4. Glass Stats Box */
-    #stats-container {
-      background: rgba(255, 255, 255, 0.2);
-      border: 1px solid rgba(255, 255, 255, 0.4);
-      padding: 20px 40px;
-      border-radius: 20px;
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      color: white;
-      font-size: 20px;
-      font-weight: bold;
-      text-align: center;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-      margin-top: 20px;
-      margin-bottom: 30px;
-    }
+button:active {
+    transform: scale(0.94);
+    box-shadow:
+        0 5px 15px rgba(255, 0, 0, 0.2),
+        inset 0 5px 12px rgba(0,0,0,0.3);
+}
 
-    .stat-number {
-      font-size: 28px;
-      color: #fff;
-      text-shadow: 1px 2px 4px rgba(0,0,0,0.2);
-    }
+.footer {
+    margin-top: 55px;
+    font-size: 11px;
+    color: #50505a;
+    letter-spacing: 3px;
+}
 
-    /* 5. Big Red Reset Button */
-    #reset-btn {
-      display: block;
-      padding: 15px 35px;
-      font-size: 20px;
-      font-weight: bold;
-      color: white;
-      background-color: #ff3b30;
-      border: 3px solid #cc0000;
-      border-radius: 12px;
-      cursor: pointer;
-      box-shadow: 0 6px 15px rgba(255, 59, 48, 0.4);
-      transition: all 0.2s ease;
-      text-transform: uppercase;
-      letter-spacing: 1px;
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
     }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 
-    #reset-btn:hover {
-      background-color: #d62820;
-      transform: scale(1.05);
-      box-shadow: 0 8px 20px rgba(255, 59, 48, 0.6);
+@media (max-width: 400px) {
+    button {
+        width: 220px;
+        height: 220px;
     }
+}
 
-    #reset-btn:active {
-      transform: scale(0.95);
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
     }
-  </style>
+}
+</style>
 </head>
+
 <body>
 
-  <h1 id="MW">My Website</h1>
-  <p id="AAW">Ahmad's Awsome Website!</p>
-  
-  <button id="nothing">Nothing Button</button>
-  
-  <div id="stats-container">
-    <p>Current Page Clicks: <span id="session-count" class="stat-number">0</span></p>
-    <p>All-Time Clicks: <span id="alltime-count" class="stat-number">0</span></p>
-  </div>
+<div class="container">
+    <h1>The Useless Button</h1>
+    <p>Go ahead. Click it. Nothing will happen.</p>
 
-  <button id="reset-btn">Reset All-Time</button>
+    <button type="button">
+        CLICK ME
+    </button>
 
-  <script>
-    const button = document.getElementById('nothing');
-    const resetBtn = document.getElementById('reset-btn');
-    const sessionDisplay = document.getElementById('session-count');
-    const allTimeDisplay = document.getElementById('alltime-count');
+    <div class="footer">
+        100% USELESS · 100% FREE
+    </div>
+</div>
 
-    let sessionClicks = 0; 
-    let allTimeClicks = parseInt(localStorage.getItem('allTimeClicks')) || 0;
-
-    sessionDisplay.textContent = sessionClicks;
-    allTimeDisplay.textContent = allTimeClicks;
-
-    // Handle the main button clicks
-    button.addEventListener('click', () => {
-      sessionClicks++;
-      allTimeClicks++;
-
-      localStorage.setItem('allTimeClicks', allTimeClicks);
-
-      sessionDisplay.textContent = sessionClicks;
-      allTimeDisplay.textContent = allTimeClicks;
-    });
-
-    // Handle the reset button click with confirmation
-    resetBtn.addEventListener('click', () => {
-      const confirmReset = confirm("Are you sure you want to delete your all-time clicks forever? This cannot be undone.");
-      
-      if (confirmReset) {
-        allTimeClicks = 0;
-        localStorage.setItem('allTimeClicks', 0);
-        allTimeDisplay.textContent = allTimeClicks;
-      }
-    });
-  </script>
 </body>
 </html>
